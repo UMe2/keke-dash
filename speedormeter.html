@@ -218,61 +218,67 @@ var data = {
 			console.log(data);
 				  //let last_feed = jsonData.feeds[jsonData.feeds.length-1];
 				 // ////console.log(last_feed);
-			feed = jsonData[(jsonData.length-1)];
+			
 			
 			
 			//console.log(matchingObjects);
 			
 			}
 
-			if(feed.perentage>=0){
-
-				if(feed.perentage<25){
-
-					lowBattery(battery_percentage);
-	
-				}
-				else{
-	
-					fullBattery(battery_percentage);
-	
-				}
+			feed = jsonData[(jsonData.length-1)];
 
 			battery_percentage.innerHTML = feed.perentage--+'%';
-			element.value = feed.perentage;
-			gear.innerHTML = feed['gear'];
-			if(feed['speed']>55){
 
-				if(feed['speed']<101)
-				countdown.innerHTML = feed['speed']++;
-			}
-			
-			else
-			{
-				if(feed['speed']<101){
-					countdown.innerHTML = feed['speed']++;
-					countdown.innerHTML = feed['speed']++;
-					countdown.innerHTML = feed['speed']++;
-				}
-				
-			}		
-
-			}
+			//if(feed.perentage>=0){
 //
-			else{
-				
-				brake();
+			//	if(feed.perentage<25){
+//
+			//		lowBattery(battery_percentage);
+	//
+			//	}
+			//	else{
+	//
+			//		fullBattery(battery_percentage);
+	//
+			//	}
+//
+			//
+			//element.value = feed.perentage;
+			//gear.innerHTML =  feed['gear'];
+			//if(feed['speed']>55){
+//
+			//	if(feed['speed']<101)
+			//	countdown.innerHTML = feed['speed']++;
+			//}
+			//
+			//else
+			//{
+			//	if(feed['speed']<101){
+			//		countdown.innerHTML = feed['speed']++;
+			//		countdown.innerHTML = feed['speed']++;
+			//		countdown.innerHTML = feed['speed']++;
+			//	}
+			//	
+			//}		
 
-				stopSim(12);
-				console.log(clearInterval(end_simulatte));
-				clearInterval(end_simulatte);
+		//	}
+//
+		//	else{
 				
-			}
+			//	brake();
+//
+			//	stopSim(12);
+			//	console.log(clearInterval(end_simulatte));
+			//	clearInterval(end_simulatte);
+				
+		//	}
 			
 	
 		});
 		
 	}
+
+	simulatte();
 
 	function simulate(){
 
