@@ -227,20 +227,24 @@ var data = {
 
 			feed = jsonData[(jsonData.length-1)];
 
-			battery_percentage.innerHTML = feed.perentage--+'%';
+			ba_percentage = Number(feed.voltage)+'%';
+			battery_percentage.innerHTML = ba_percentage;
+			
+
+			if(ba_percentage<25){
+				
+				lowBattery(ba_percentage);
+
+			}
+			else{
+
+				fullBattery(ba_percentage);
+
+			}
 
 			//if(feed.perentage>=0){
 //
-			//	if(feed.perentage<25){
-//
-			//		lowBattery(battery_percentage);
-	//
-			//	}
-			//	else{
-	//
-			//		fullBattery(battery_percentage);
-	//
-			//	}
+			//	
 //
 			//
 			//element.value = feed.perentage;
