@@ -5,19 +5,20 @@
   crossorigin="anonymous"></script>
 <style>
 
+	#battery-title{
 
+		font-family: 'Times New Roman', Times, serif;
+	}
 	.animate-gear {
 		
 		animation-name: gearchange;
 		transition: all;
 		animation-duration: 1ms;
-		
 	  }
 	  
 	  @keyframes gearchangeup {
 		from {padding-bottom: -10px; bottom:0;}
 		to {padding-bottom: 3px}
-
 	  }
 
 	  @keyframes gearchangedown {
@@ -25,18 +26,6 @@
 		from {padding-top: 20px;}
 		to {padding-top: 10px}
 	  }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	.charge-low {
@@ -56,8 +45,6 @@
         top: 0.6em;
         left: 0.6em;
       }
-
-
 
 	  .battery {
 		padding: 10px 10px;
@@ -141,30 +128,31 @@
 			
 		
 			<div id="icon">
-			
-			  <!-- <i class="fa fa-battery-quarter fa-3x"></i> -->
+				<!-- <i class="fa fa-battery-quarter fa-3x"></i> -->
 			 
-			  <!-- <img id="" src="http://i1204.photobucket.com/albums/bb409/david_barukcic/battery_icon_zpst5bk33aq.png"/> -->
+				<!-- <img id="" src="http://i1204.photobucket.com/albums/bb409/david_barukcic/battery_icon_zpst5bk33aq.png"/> -->
 			</div>
-			<div id="status"><a id="battery_percentage" style="padding:5% 1% 0% 21%; float:right; position:absolute; font-size:13px; font-color:rgb(80, 23, 212)">-</a>
-				<a style="color:white; font-size:15px;  position:absolute; padding:-1px">- </a>
-				<progress id="battery" style="width:50%; height:55px; padding:-130px; color:black" value="-"  max="100"><h1 style="font-size: 100px;"></h1></progress>
-				<a style="color:white; font-size:15px; position:absolute; float:right; padding:-10px">+</a>
+			<div id="status"><a id="battery_percentage" style="padding:5% 1% 0% 21%; float:right; position:absolute; font-size:13px; font-color:rgb(252, 250, 255)"></a>
+				<a id="battery-title" style="color:white; font-size:14px;  position:absolute; padding:-16px; left:167; top:-6; text-transform:none; color:rgb(54, 160, 221); font-family: oblique;">Battery</a>
+				<a style="color:white; font-size:12px; position:absolute; float:left; padding:-1px; left:111">-</a>
+				<img src="battery top.png" style="width: 18px;  position:absolute; left:270; top:13; border-color:white" >
+				<progress id="battery" style="width:50%; height:55px; padding:-130px; color:black" value="1"  max="100"><h1 style="font-size: 100px;"></h1></progress>
+				<a style="color:white; font-size:10px; position:absolute; float:right; padding:-20px; right:111; top:2px;">+</a>
 			</div>
 			
 			<h1 id="countdown">0</h1>
 			<div id="mph">mph</div>	
-		</div>
+			</div>
 	
-		  <div id="car" class="active">
-			<img src="http://i1204.photobucket.com/albums/bb409/david_barukcic/engine_icon_zpsnvg1y3qj.png" />
-			<h2>ENGINE<br>DIAGNOSTICS</h2>
-			<h3>DC/DC Converter<br>Failure<span class="small">not solved</span></h3>
-		  </div>
+			<div id="car" class="active">
+				<img src="http://i1204.photobucket.com/albums/bb409/david_barukcic/engine_icon_zpsnvg1y3qj.png" />
+				<h2>ENGINE<br>DIAGNOSTICS</h2>
+				<h3>DC/DC Converter<br>Failure<span class="small">not solved</span></h3>
+				
+			</div>
   
 		  <div id="cardva">
 			<img src="http://i1204.photobucket.com/albums/bb409/david_barukcic/temperature_icon_zpssyam3lm5.png" />
-  
 			<h2>ENGINE<br>TEMPERATURE</h2>
 			<h3>46<span class="small">	℃</span></h3>
 		  </div>
@@ -172,7 +160,7 @@
 	  </div>
 	  <div style="color:white; font-size:20px; color:#00a8ff;">
 		<center>
-			<h1 id="gear" style="border-style:groove; max-width:83px; border-radius:40%; border-color:#cc00ff">R</h1>
+			<h1 id="gear" style="border-style:groove; max-width:83px; border-radius:40%; border-color:#cc00ff">D</h1>
 		</center>
 	</div>
 	</div>
@@ -181,7 +169,7 @@
   <img style="position: absolute; right:-20; bottom:0; border-radius:15px; float:left; max-width:250px" src="Revive Earth.png">
   <div style="position: absolute;left:55; bottom:-12;border-radius:15px; color:white">
 	<img style="margin-bottom:-40px" src="kekeVector.png">
-	 <h1  id="blink" style="padding:0px 26px; top:0; color:#00a8ff;">10<span style="color:#ffffff">:</span>59</h1>
+	 <h1  id="blink" style="padding:0px 26px; top:0; color:#00a8ff;"><span id="hour">10</span><span style="color:#ffffff" >:</span><span id="minute">59</span></h1>
   </div>
   
   <!-- <img style="position: absolute; bottom:0; background-color: #84bbd6; border-radius:15px" src="kekeVector.png"> -->
@@ -204,7 +192,9 @@ var data = {
 	var feed = null;
 
 	var end_simulatte = null;
+	battery_percentage.innerHTML = 45+'%';
 
+	fullBattery(45);
 
      function simulatte(){
 		fetch('http://127.0.0.1:8000/api')
@@ -216,12 +206,10 @@ var data = {
 		  // FUNCTION TO GET LAST FEED OF SPECIFIC IDS VARIABLES
 		  function getLastFeed(field_id) {
 			console.log(data);
-				  //let last_feed = jsonData.feeds[jsonData.feeds.length-1];
-				 // ////console.log(last_feed);
-			
-			
-			
-			//console.log(matchingObjects);
+				//let last_feed = jsonData.feeds[jsonData.feeds.length-1];
+				// ////console.log(last_feed);
+						
+				//console.log(matchingObjects);
 			
 			}
 
@@ -338,13 +326,22 @@ var data = {
 
 // call interval 
 var timer = null;// window.setInterval(countItDown, 100);
+var hour = document.getElementById("hour"); null;// window.setInterval(countItDown, 100);
+var minute = document.getElementById("minute"); null;// window.setInterval(countItDown, 100);
+
 countdown.textContent = 0;
 
 setInterval(function(){
 
 	let val = blink.innerHTML;
 
-	blink.innerHTML = date.toLocaleTimeString();
+	let date = new Date();
+
+	hour.innerHTML=date.getHours();;
+	minute.innerHTML= date.getMinutes();
+
+	
+// date.toLocaleTimeString();
 	if(val=='`')
 	{ 	
 	//	blink.innerHTML=':';
@@ -358,7 +355,7 @@ setInterval(function(){
 
 
 
-},90000);
+},900);
 function accelerate(){
 	//countdown.textContent = 0;
 	clearInterval(timer);
